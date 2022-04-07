@@ -17,5 +17,7 @@ class Projects(models.Model):
     live_link = models.URLField(max_length=222, default='url')
     posted_by = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE )
 
+    def save_project(self):
+        self.save()
 
 
