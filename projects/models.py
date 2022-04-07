@@ -1,3 +1,4 @@
+import datetime
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
@@ -16,6 +17,7 @@ class Projects(models.Model):
     description = models.TextField()
     live_link = models.URLField(max_length=222, default='url')
     posted_by = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE )
+    date_posted = models.DateTimeField(auto_now_add=True)
 
     def save_project(self):
         self.save()
