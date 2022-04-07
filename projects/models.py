@@ -22,4 +22,13 @@ class Projects(models.Model):
     def save_project(self):
         self.save()
 
+    def search_by_title(cls, title):
+        project = cls.objects.filter(title__icontains=title)
+        return project
+
+
+    def __str__(self):
+        return self.title
+        
+
 

@@ -5,8 +5,14 @@ from .models import Projects
 
 # Create your views here.
 def index(request):
+    return render(request, 'index.html')
+
+@login_required(login_url='/accounts/login/')
+def home(request):
     projects = Projects.objects.all()
-    return render(request, 'index.html', {"projects": projects})
+    return render(request, 'home.html', {"projects": projects})
+
+
 
 @login_required(login_url='/accounts/login/')
 def newProject(request):
@@ -23,7 +29,8 @@ def newProject(request):
         form = PostProjectForm()
     return render(request, 'postproject.html', {'form': form})
 
-
+def search(request):
+    pass
 
 
 

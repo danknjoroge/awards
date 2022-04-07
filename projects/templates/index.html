@@ -8,6 +8,8 @@
     {% for project in projects %}
        
        <h4>Project Name: {{project.title}}</h4>
+       {{project.posted_by}}
+       {{project.date_posted}}
 
     {% endfor %}
 
