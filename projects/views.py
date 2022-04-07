@@ -21,7 +21,7 @@ def newProject(request):
 
     else:
         form = PostProjectForm()
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'postproject.html', {'form': form})
 
 
 
