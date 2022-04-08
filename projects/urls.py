@@ -23,6 +23,7 @@ urlpatterns = [
     path('newProject/', views.newProject, name='newProject'),
     # path('profile/', views.updateProfile, name='profile'),
     path(r'imagedetails/<int:image_id>', views.one_image, name='imagedetails'),
+    path('profile/', views.profile, name='profile'),
     re_path(r'^api/profile/$', views.ProfileList.as_view()),
 ]
 if settings.DEBUG:
