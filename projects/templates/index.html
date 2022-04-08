@@ -15,9 +15,12 @@
         <div class="col-lg-4">
             <h4>Project Name: {{project.title}}</h4>
             {{project.image.url}}
-            <img src="{{project.image.url}}" alt="" width="341rem">
+            <!-- <img src="{{project.image.url}}" alt="" width="341rem"> -->
             {{project.posted_by}}
             {{project.date_posted}}
+            <a href="{% url 'imagedetails' project.id %}">
+                <img src="{{project.image.url}}" alt="" width="341rem">
+            </a>
         </div>
         {% endfor %}
     </div>

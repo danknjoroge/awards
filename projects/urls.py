@@ -22,8 +22,8 @@ urlpatterns = [
     re_path(r'^search/$', views.search, name='search'),
     path('newProject/', views.newProject, name='newProject'),
     # path('profile/', views.updateProfile, name='profile'),
-
-    re_path(r'^api/profile/$', views.ProfileList.as_view())
+    path(r'imagedetails/<int:image_id>', views.one_image, name='imagedetails'),
+    re_path(r'^api/profile/$', views.ProfileList.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

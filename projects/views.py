@@ -1,5 +1,6 @@
 from email.mime import message
 from pyexpat.errors import messages
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import PostProjectForm, UpdateProfile, UpdateUser
@@ -8,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 def index(request):
@@ -52,6 +54,16 @@ def search(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
+
+
+@login_required(login_url='/accounts/login/')
+def one_image(request, image_id):
+    try:
+        image = Projects.objects.get(id = image_id)
+    except ObjectDoesNotExist:
+        raise Http404()
+
+    return render(request, 'image.html', {'image': image})
 
 
 
