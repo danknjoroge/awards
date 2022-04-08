@@ -1,5 +1,6 @@
+from dataclasses import field
 from rest_framework import serializers
-from .models import Projects, User
+from .models import Projects, Profile
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,3 +9,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
         
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('profile_pic', 'bio', 'contact' )
+
+
+
+
