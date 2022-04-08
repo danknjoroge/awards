@@ -1,5 +1,6 @@
-from .models import Projects
+from .models import Profile, Projects
 from django import forms
+from django.contrib.auth.models import User
 
 
 class PostProjectForm(forms.ModelForm):
@@ -7,4 +8,15 @@ class PostProjectForm(forms.ModelForm):
         model = Projects
         exclude = ['posted_by', 'date_posted']
 
+class UpdateProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+
+
+class UpdateUser(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        exclude = ['user']
 

@@ -14,12 +14,12 @@
         </ul>
         {% if user.is_authenticated %}
 
-        <form class="navbar-form my-3" role="search" action="">
+        <form class="navbar-form my-3" role="search" action="{% url 'search' %} ">
 
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="image">
             <div class="input-group-btn">
-          </div>
+              <button class="btn btn-default" type="submit">Search</button>
 
         </form> 
             <a class='btn btn-default' href="/accounts/logout">Logout</a>

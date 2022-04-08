@@ -17,4 +17,7 @@ urlpatterns = [
     re_path(r'^login/$', LoginView.as_view(), {"next_page": '/'}),
 
     path('home/', views.home, name='home'),
+    re_path(r'^search/$', views.search, name='search'),
+    path('newProject/', views.newProject, name='newProject'),
+    # path('profile/', views.updateProfile, name='profile'),
 ]

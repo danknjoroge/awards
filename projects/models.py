@@ -2,14 +2,37 @@ import datetime
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # Create your models here.
-# class Profile(models.Model):
-#     user = models.OneToOneField(User,on_delete=models.CASCADE)
-#     profile_pic = models.ImageField(default='default.jpg', upload_to='images/')
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_pic = models.ImageField(default='default.jpg', upload_to='images/')
+    bio =models.TextField()
+    contact = models.CharField(max_length=22)
 
-#     def __str__(self):
-#         return f'{self.user.username} Profile'
+    
+    def __str__(self):
+        return f'{self.user.username} Profile'
+    
+    # def save_profile(self):
+    #     self.save()
+
+    def update_profile(self):
+        self.save()
+
+    @receiver(post_save , sender = User)
+    def create_profile(instance,sender,created,**kwargs):
+        if created:
+            Profile.objects.create(user = instance)
+
+    @receiver(post_save,sender = User)
+    def save_profile(sender,instance,**kwargs):
+        instance.profile.save()
+
+
 
 class Projects(models.Model):
     title = models.CharField(max_length=122)
@@ -22,9 +45,10 @@ class Projects(models.Model):
     def save_project(self):
         self.save()
 
-    def search_by_title(cls, title):
-        project = cls.objects.filter(title__icontains=title)
-        return project
+    @classmethod
+    def search_by_title(cls,search_term):
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
 
 
     def __str__(self):
