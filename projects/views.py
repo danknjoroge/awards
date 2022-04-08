@@ -3,7 +3,10 @@ from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import PostProjectForm, UpdateProfile, UpdateUser
-from .models import Projects
+from .models import Projects, Profile
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer, ProfileSerializer
 
 # Create your views here.
 def index(request):
@@ -72,7 +75,11 @@ def profile(request):
 #     return render(request, 'profile.html',params)
 
 
-        
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        profiles= Profile.objects.all()
+        serializers= ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)
 
 
 
