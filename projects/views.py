@@ -3,7 +3,7 @@ from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .forms import PostProjectForm, UpdateProfile, UpdateUser
+from .forms import PostProjectForm,ProfileForm
 from .models import Projects, Profile
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -51,9 +51,19 @@ def search(request):
         
         return render(request, 'search.html')
 
-@login_required(login_url='/accounts/login/')
-def profile(request):
-    current_user = request.user
+# @login_required(login_url='/accounts/login/')
+# def profile(request):
+#     current_user = request.user
+#     if request.POST:
+#         proform = ProfileForm(request.POST, request.FILES)
+#         if proform.is_valid():
+#             profile = proform.save(commit=False)
+#             profile.user= current_user
+#             profile.save()
+#         return redirect('profile')
+#     else:
+#         proform = ProfileForm()
+#     return render(request, 'profile.html', {'proform': proform})
 
 
 @login_required(login_url='/accounts/login/')
@@ -66,8 +76,10 @@ def one_image(request, image_id):
     return render(request, 'image.html', {'image': image})
 
 
-
+@login_required(login_url='/accounts/login/')
 def profile(request):
+    current_user = request.user
+
     return render(request, 'profile.html')
 
 # @login_required(login_url='/accounts/login/')
@@ -107,6 +119,20 @@ class ProfileList(APIView):
 
 
 
+
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+        return redirect('profile')
+
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html', {'form': form})
 
 
 

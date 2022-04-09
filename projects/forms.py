@@ -8,15 +8,26 @@ class PostProjectForm(forms.ModelForm):
         model = Projects
         exclude = ['posted_by', 'date_posted']
 
-class UpdateProfile(forms.ModelForm):
+
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
 
 
-class UpdateUser(forms.ModelForm):
-    email = forms.EmailField()
-    class Meta:
-        model = User
-        exclude = ['user']
+
+
+
+
+# class UpdateProfile(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         exclude = ['user']
+
+
+# class UpdateUser(forms.ModelForm):
+#     email = forms.EmailField()
+#     class Meta:
+#         model = User
+#         exclude = ['user']
 
