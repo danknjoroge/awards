@@ -115,9 +115,14 @@ def profile(request):
 
     else:
         form = ProfileForm()
-    return render(request, 'profile.html', {'form': form})
+        profile = Profile.objects.all()
+    return render(request, 'profile.html', {'form': form, 'profile': profile})
 
+def profileview(request, profile_id):
+    profile = Profile.objects.get(user=profile_id)
+    userid = request.user.id
 
+    return render(request, 'profileview.html',{"profile":profile, "userid":userid})
 
 
 class ProfileList(APIView):

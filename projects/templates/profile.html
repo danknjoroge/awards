@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {% load bootstrap5 %}
 {% load static %}
 
@@ -12,26 +14,43 @@
   <title>Profile</title>
   {{form.media}}
 
-{% block styles %} 
-{% bootstrap_css %}
-{% endblock %}
+
 </head>
 
 <body>
+  {% block content %} 
+  {% block styles %} 
+  {% bootstrap_css %}
+  {% endblock %}
+  
   {{user.username}}
   {{user.email}}
+  {{user.profile_pic.url}}
   {{user.profile.bio}}
+  <img src="{{user.profile.profile_pic.url}}" alt="img" width="100px">
+  {{user.profile.contact}}
+  
+
+  {% for prof in profile %}
+    <h1>profiles</h1>
+  {% endfor %}
 
   <form  action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
     
     {% bootstrap_form form%}
-    <input type="submit" class="btn btn-success btn-lg" value="Post">
+    <input type="submit" class="btn btn-primary btn-md" value="Update">
   </form>
+  Projects:
+  
+
+  {% endblock %}
+
 
    {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   {% bootstrap_javascript %} {% endblock %}
+  
 
 </body>
 

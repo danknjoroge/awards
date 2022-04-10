@@ -4,14 +4,28 @@
 
 {% block content %}
     <h1>Hello {{user}} </h1>
+   
 
-    {% for project in projects %}
-       
-       <h4>Project Name: {{project.title}}</h4>
-       {{project.posted_by}}
-       {{project.date_posted}}
-
-    {% endfor %}
+    <div class="container">
+        
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-4">
+                <h4>Project Name: {{project.title}}</h4>
+                {{project.image.url}}
+                <!-- <img src="{{project.image.url}}" alt="" width="341rem"> -->
+                {{project.posted_by}}
+                {{project.date_posted}}
+                <a href="{% url 'imagedetails' project.id %}">
+                    <img src="{{project.image.url}}" alt="" width="341rem">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        
+    
+        </div>
+    
 
 
     

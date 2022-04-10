@@ -24,6 +24,8 @@ urlpatterns = [
     # path('profile/', views.updateProfile, name='profile'),
     path(r'imagedetails/<int:image_id>', views.one_image, name='imagedetails'),
     path('profile/', views.profile, name='profile'),
+    path(r'profileview/<int:profile_id>', views.profileview, name='profileview'),
+
     re_path(r'^api/profile/$', views.ProfileList.as_view()),
     re_path(r'^api/project/$', views.ProjectList.as_view()),
     re_path(r'api/profile/profile-id/(?P<pk>[0-9]+)/$',
