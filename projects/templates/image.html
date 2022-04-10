@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load static %}
 
+{% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>Hello {{user}} </h1>
-
-    <div class="container">
+    <!-- <h1>Hello {{user}} </h1> -->
+<div class="container-fluid single">
+  <h3>View Project Details Below</h3>
+  <div class="container">
         
     <div class="row">
         
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <h4>Project Name: {{image.title}}</h4>
-            {{image.image.url}}
             <img src="{{image.image.url}}" alt="" width="341rem"> <br>
-            
-            <h4>Posted by: {{image.posted_by}} </h4>
+            <p>Project Description: {{image.description}}</p>
+            <p> Live Link: <br> <a href="">{{image.live_link}}</a></p>
+            <h4>Posted by: {{image.posted_by}}</h4>
             <p>Posted on: {{image.date_posted}}</p>
         </div>
-        <form class="my-5">
+        <div class="col-md-6">
+          <form class="my-5">
             <h4>Rate the Project</h4>
 
             <div class="form-group">
@@ -68,10 +75,12 @@
                   <option>10</option>
                 </select>
               </div>
-              <input type="submit" class="btn my-2 btn-primary"value="View Rating">
+              <input type="submit" class="btn my-2 btn-primary"value="View Average Rating">
         </form>
+        </div>
        
     </div>
 
     </div>
+</div>
 {% endblock %}

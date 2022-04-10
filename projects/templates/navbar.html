@@ -22,8 +22,9 @@
               <button class="btn btn-default" type="submit">Search</button>
 
         </form> 
+        <a class='btn btn-default' href="{% url 'profile' %}"> Profile</a>
+        <a class='btn btn-default' href="{% url 'newProject' %}">Upload Project</a>
             <a class='btn btn-default' href="/accounts/logout">Logout</a>
-            <a class='btn btn-default' href="{% url 'profile' %}"> Profile</a>
         {% else %}
         <span class="navbar-text">
             <!-- <a class='btn btn-default' href="/accounts/login">Login</a>

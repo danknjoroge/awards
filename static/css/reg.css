@@ -1,3 +1,7 @@
+*{
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .signin{
     margin-top: 123px; 
     color: orangered;
@@ -9,6 +13,9 @@
 }
 .index{
     background-color: rgb(188, 209, 209);
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
 
 }
 input[type="submit"]{
