@@ -14,7 +14,7 @@
         </ul>
         {% if user.is_authenticated %}
 
-        <form class="navbar-form my-3" role="search" action="{% url 'search' %} ">
+        <form class="navbar-form " role="search" action="{% url 'search' %} ">
 
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="image">
@@ -26,8 +26,8 @@
             <a class='btn btn-default' href="{% url 'profile' %}"> Profile</a>
         {% else %}
         <span class="navbar-text">
-            <a class='btn btn-default' href="/accounts/login">Login</a>
-            <a class='btn btn-default' href="/accounts/register">Register</a>
+            <!-- <a class='btn btn-default' href="/accounts/login">Login</a>
+            <a class='btn btn-default' href="/accounts/register">Register</a> -->
         </span>
         {% endif %}
       </div>

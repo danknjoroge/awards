@@ -23,25 +23,25 @@
   {% bootstrap_css %}
   {% endblock %}
   
-  {{user.username}}
-  {{user.email}}
-  {{user.profile_pic.url}}
-  {{user.profile.bio}}
-  <img src="{{user.profile.profile_pic.url}}" alt="img" width="100px">
-  {{user.profile.contact}}
-  
-
-  {% for prof in profile %}
-    <h1>profiles</h1>
-  {% endfor %}
-
-  <form  action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-    
-    {% bootstrap_form form%}
-    <input type="submit" class="btn btn-primary btn-md" value="Update">
-  </form>
-  Projects:
+  <div class="container row">
+   
+    <div class="col-md-4">
+      <form  action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-primary btn-md" value="Update">
+      </form>
+    </div>
+    <div class="col-md-4">
+      {{user.username}} <br>
+      {{user.email}} <br>
+      {{user.profile_pic.url}}
+      {{user.profile.bio}}
+      <img src="{{user.profile.profile_pic.url}}" alt="img" width="100px">
+      {{user.profile.contact}}
+        </div>
+  </div>
   
 
   {% endblock %}
