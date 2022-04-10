@@ -3,7 +3,7 @@ from pyexpat.errors import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .forms import PostProjectForm,ProfileForm
+from .forms import PostProjectForm,ProfileForm, UpdateProfile, UpdateUser
 from .models import Projects, Profile
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -82,26 +82,41 @@ def profile(request):
 
     return render(request, 'profile.html')
 
-# @login_required(login_url='/accounts/login/')
-# def updateProfile(request):
-#     # current_user = request.user
-#     if request.method == 'POST':
-#         user_form= UpdateUser(request.POST, instance=request.user)
-#         profile_form= UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
-#         if user_form.is_valid() and profile_form.is_valid():
-#             user_form.save()
-#             profile_form.save()
-#             messages.success(request,'Profile updated successfully!')
+@login_required(login_url='/accounts/login/')
+def updateprofile(request):
+    # current_user = request.user
+    if request.method == 'POST':
+        user_form= UpdateUser(request.POST, instance=request.user)
+        profile_form= UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request,'Profile updated successfully!')
 
-#             return redirect('profile')
-#     else:
-#         user_form =UpdateUser(instance=request.user)
-#         profile_form = UpdateProfile(instance=request.user.profile)
-#         params= {
-#             'user_form':user_form,
-#             'profile_form':profile_form
-#         }
-#     return render(request, 'profile.html',params)
+            return redirect(to='profile')
+    else:
+        user_form =UpdateUser(instance=request.user)
+        profile_form = UpdateProfile(instance=request.user.profile)
+        
+    return render(request, 'profile.html',{'user_form':user_form, 'form':profile_form})
+
+
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = current_user
+            post.save()
+        return redirect('profile')
+
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html', {'form': form})
+
+
 
 
 class ProfileList(APIView):
@@ -118,21 +133,20 @@ class ProfileList(APIView):
         return Response(serializers.data, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        project= Projects.objects.all()
+        serializers= ProjectSerializer(project, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers= ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.data, status=status.HTTP_400_BAD_REQUEST)
 
 
-def profile(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = current_user
-            post.save()
-        return redirect('profile')
-
-    else:
-        form = ProfileForm()
-    return render(request, 'profile.html', {'form': form})
 
 
 

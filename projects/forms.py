@@ -19,15 +19,15 @@ class ProfileForm(forms.ModelForm):
 
 
 
-# class UpdateProfile(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         exclude = ['user']
+class UpdateProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
 
 
-# class UpdateUser(forms.ModelForm):
-#     email = forms.EmailField()
-#     class Meta:
-#         model = User
-#         exclude = ['user']
+class UpdateUser(forms.ModelForm):
+    email = forms.EmailField()
+    class Meta:
+        model = User
+        exclude = ['username']
 

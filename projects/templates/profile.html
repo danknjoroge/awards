@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>New Article</title>
+  <title>Profile</title>
   {{form.media}}
 
 {% block styles %} 
@@ -24,7 +24,7 @@
 
   <form  action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
     {%csrf_token%}
-
+    
     {% bootstrap_form form%}
     <input type="submit" class="btn btn-success btn-lg" value="Post">
   </form>
