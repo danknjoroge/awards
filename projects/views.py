@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from .permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
 def index(request):
@@ -120,6 +121,7 @@ def profile(request):
 
 
 class ProfileList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
     def get(self, request, format=None):
         profiles= Profile.objects.all()
         serializers= ProfileSerializer(profiles, many=True)
@@ -131,6 +133,9 @@ class ProfileList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.data, status=status.HTTP_400_BAD_REQUEST)
+
+    # def 
+
 
 
 class ProjectList(APIView):
