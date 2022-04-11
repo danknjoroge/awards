@@ -22,11 +22,12 @@
             <p> Live Link: <br> <a href="">{{image.live_link}}</a></p>
             <h4>Posted by: {{image.posted_by}}</h4>
             <p>Posted on: {{image.date_posted}}</p>
+
+            <a class='btn btn-danger'href="{% url 'delete' image.id %}" target="_blank">Delete</a> </a>
         </div>
         <div class="col-md-6">
           <form class="my-5">
             <h4>Rate the Project</h4>
-
             <div class="form-group">
               <label for="sel1">Design:</label>
               <select class="form-control" id="sel1">

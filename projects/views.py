@@ -103,6 +103,7 @@ def updateprofile(request):
     return render(request, 'profile.html',{'user_form':user_form, 'form':profile_form})
 
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -118,11 +119,27 @@ def profile(request):
         profile = Profile.objects.all()
     return render(request, 'profile.html', {'form': form, 'profile': profile})
 
-def profileview(request, profile_id):
-    profile = Profile.objects.get(user=profile_id)
+def profileview(request, id):
+    profile = Projects.objects.get(user=id)
     userid = request.user.id
 
     return render(request, 'profileview.html',{"profile":profile, "userid":userid})
+
+def delete_post(request, pk):
+    post = Projects.objects.get(id=pk)
+    
+    if request.method == 'POST':
+        try:
+            post.delete()
+            return redirect('home')
+        except Exception:
+            messages.error('Post does not exist')
+
+    context = { 'obj':post }
+    return render(request, 'delete.html', context)
+
+
+
 
 
 class ProfileList(APIView):

@@ -25,6 +25,8 @@ urlpatterns = [
     path(r'imagedetails/<int:image_id>', views.one_image, name='imagedetails'),
     path('profile/', views.profile, name='profile'),
     path(r'profileview/<int:profile_id>', views.profileview, name='profileview'),
+    path(r'delete/<int:pk>', views.delete_post, name='delete'),
+
 
     re_path(r'^api/profile/$', views.ProfileList.as_view()),
     re_path(r'^api/project/$', views.ProjectList.as_view()),

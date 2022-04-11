@@ -23,6 +23,8 @@ class Profile(models.Model):
     def update_profile(self):
         self.save()
 
+    
+
     # @receiver(post_save , sender = User)
     # def create_profile(instance,sender,created,**kwargs):
     #     if created:
