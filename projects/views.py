@@ -33,7 +33,7 @@ def newProject(request):
             post = form.save(commit=False)
             post.posted_by = current_user
             post.save()
-        return redirect(index)
+        return redirect(home)
 
     else:
         form = PostProjectForm()

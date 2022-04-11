@@ -26,10 +26,8 @@
     <div class="col-md-2"></div>
 </div>
 </div>
+{% endblock %}
 
-
-
-    
-
-
+{% block scripts %} {{block.super}}
+  <script type="text/javascript" src="{%static 'js/post.js'%}"></script>
 {% endblock %}
