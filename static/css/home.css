@@ -7,10 +7,13 @@
 }
 .single1{
     background-color: rgb(185, 198, 209);
-    height: 620px;
 }
 .delete{
     background-color: rgb(185, 198, 209);
     height: 620px;
+}
+h3{
+    text-align: center;
+    text-transform: uppercase;
 }
 

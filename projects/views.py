@@ -117,13 +117,14 @@ def profile(request):
     else:
         form = ProfileForm()
         profile = Profile.objects.all()
-    return render(request, 'profile.html', {'form': form, 'profile': profile})
+        project = Projects.objects.all()
+    return render(request, 'profile.html', {'form': form, 'profile': profile, 'project': project})
 
 def profileview(request, id):
     profile = Projects.objects.get(user=id)
     userid = request.user.id
 
-    return render(request, 'profileview.html',{"profile":profile, "userid":userid})
+    return render(request, 'projects.html',{"profile":profile, "userid":userid})
 
 def delete_post(request, pk):
     post = Projects.objects.get(id=pk)
