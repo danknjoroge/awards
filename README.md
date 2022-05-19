@@ -6,7 +6,7 @@ It's a web application that allows register and signin to the website. In additi
 ## Installation And Setup Requirements
 * Have a computer connected to the internet with browser and code editor installed.
 * Open Terminal in your computer
-* Clone the repository to your machine from https://github.com/danknjoroge/insta.git
+* Clone the repository to your machine from (https://github.com/danknjoroge/awards.git)
 * Open application using code editor of your choice preferrably atom or visual studio using code . or atom . 
 * Have installed a virtual enironment
 * Have django installed in the virtual environment. 
