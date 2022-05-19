@@ -1,4 +1,4 @@
-## insta
+## awards
 ## By Daniel Njoroge
 
 ## Description
